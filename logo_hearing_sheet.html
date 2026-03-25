@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ロゴ制作 ヒアリングシート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@300;400;500&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-muted: #8a8a8a;
+    --rule: #d8d8d8;
+    --rule-light: #efefef;
+    --accent: #2a4fff;
+    --bg: #fafaf8;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 48px 32px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .doc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    gap: 24px;
+  }
+  .doc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .doc-meta {
+    text-align: right;
+  }
+  .meta-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+  .meta-line {
+    width: 120px;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Form elements */
+  .field-block {
+    margin-bottom: 20px;
+  }
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .field-note {
+    font-size: 10px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .write-line {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .write-area {
+    width: 100%;
+    min-height: 32px;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    background: transparent;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px;
+    color: var(--ink);
+    padding: 4px 0;
+    margin-bottom: 10px;
+    outline: none;
+    resize: none;
+  }
+  .write-area::placeholder { color: var(--rule); }
+
+  /* Grid fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+  }
+  .field-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 24px;
+  }
+
+  /* Check list */
+  .check-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 16px;
+    margin-top: 4px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .check-item:hover { border-color: var(--accent); color: var(--ink); }
+  .check-item.selected { border-color: var(--accent); background: #f0f3ff; color: var(--accent); }
+  .check-box {
+    width: 14px;
+    height: 14px;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .check-mark { display: none; font-size: 10px; }
+  .check-item.selected .check-mark { display: block; }
+
+  /* Scale */
+  .scale-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .scale-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .scale-dots {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+  }
+  .scale-dot {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .scale-dot:hover { border-color: var(--accent); }
+  .scale-dot.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .scale-end {
+    font-size: 10px;
+    color: var(--ink-muted);
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  /* Color palette */
+  .color-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .color-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .color-swatch {
+    width: 40px;
+    height: 40px;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .color-chip.selected .color-swatch { border-color: var(--ink); transform: scale(1.1); }
+  .color-name {
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    color: var(--ink-muted);
+  }
+
+  /* Delivery table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .table th {
+    background: var(--ink);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule-light);
+    color: var(--ink-soft);
+    vertical-align: middle;
+  }
+  .table tr:last-child td { border-bottom: none; }
+  .table tr:nth-child(even) td { background: var(--rule-light); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+  .tag.req { border-color: var(--accent); color: var(--accent); }
+
+  /* Footer */
+  .doc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    margin-top: 48px;
+  }
+  .footer-note {
+    font-size: 10px;
+    color: var(--ink-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Print */
+  @media print {
+    body { padding: 24px; background: white; }
+    .write-area { border-bottom: 1px solid #ccc; }
+    .check-item, .scale-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div>
+    <div class="doc-label">Logo Design Project</div>
+    <div class="doc-title">ヒアリングシート</div>
+  </div>
+  <div class="doc-meta">
+    <div class="meta-field">
+      <span class="meta-label">DATE</span>
+      <div class="meta-line"></div>
+    </div>
+    <div class="meta-field">
+      <span class="meta-label">CLIENT</span>
+      <div class="meta-line"></div>
+    </div>
+    <div class="meta-field">
+      <span class="meta-label">VERSION</span>
+      <div class="meta-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 会社情報 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">会社・サービス基本情報</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="field-grid">
+    <div class="field-block">
+      <div class="field-label">会社名（日本語）</div>
+      <textarea class="write-area" rows="1" placeholder="例：株式会社〇〇"></textarea>
+    </div>
+    <div class="field-block">
+      <div class="field-label">会社名（英語 / ロゴに使う表記）</div>
+      <textarea class="write-area" rows="1" placeholder="例：SimEnv Inc."></textarea>
+    </div>
+    <div class="field-block">
+      <div class="field-label">略称・愛称（あれば）</div>
+      <textarea class="write-area" rows="1" placeholder="例：SE / SimEnv"></textarea>
+    </div>
+    <div class="field-block">
+      <div class="field-label">設立時期・フェーズ</div>
+      <textarea class="write-area" rows="1" placeholder="例：2024年設立、シード期"></textarea>
+    </div>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">プロダクト・サービスの一言説明</div>
+    <div class="field-note">「何を、誰に、どう提供するか」を簡潔に</div>
+    <textarea class="write-area" rows="2" placeholder="例：建築・都市設計者向けの熱・流体シミュレーションSaaS"></textarea>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">競合・参照している会社（あれば）</div>
+    <textarea class="write-area" rows="1" placeholder="例：IES VE、OpenStudio、DesignBuilder"></textarea>
+  </div>
+</div>
+
+<!-- 02 ターゲット -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">ターゲット・ポジショニング</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">主なユーザー像</div>
+    <div class="check-grid" id="user-checks">
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>設計事務所</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>ゼネコン</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>デベロッパー</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>大学・研究機関</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>行政・コンサル</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>その他</div>
+    </div>
+  </div>
+
+  <div class="field-block" style="margin-top:16px">
+    <div class="field-label">競合との差別化ポイント（強み）</div>
+    <textarea class="write-area" rows="2" placeholder="例：専門知識不要のUI / 日本の気象データ特化 / BIMとのシームレス連携"></textarea>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">5年後のブランドイメージ（なりたい姿）</div>
+    <textarea class="write-area" rows="1" placeholder="例：建築業界のFigma的存在 / 環境設計の標準ツール"></textarea>
+  </div>
+</div>
+
+<!-- 03 トーン & フィール -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">ブランドトーン & フィール</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">印象スライダー（該当する数字をクリック）</div>
+  </div>
+
+  <div class="scale-row">
+    <span class="scale-label">技術的・専門的</span>
+    <div class="scale-dots">
+      <div class="scale-dot" onclick="selectDot(this)">1</div>
+      <div class="scale-dot" onclick="selectDot(this)">2</div>
+      <div class="scale-dot" onclick="selectDot(this)">3</div>
+      <div class="scale-dot" onclick="selectDot(this)">4</div>
+      <div class="scale-dot" onclick="selectDot(this)">5</div>
+    </div>
+    <span class="scale-end">親しみやすい</span>
+  </div>
+
+  <div class="scale-row">
+    <span class="scale-label">アカデミック</span>
+    <div class="scale-dots">
+      <div class="scale-dot" onclick="selectDot(this)">1</div>
+      <div class="scale-dot" onclick="selectDot(this)">2</div>
+      <div class="scale-dot" onclick="selectDot(this)">3</div>
+      <div class="scale-dot" onclick="selectDot(this)">4</div>
+      <div class="scale-dot" onclick="selectDot(this)">5</div>
+    </div>
+    <span class="scale-end">スタートアップ</span>
+  </div>
+
+  <div class="scale-row">
+    <span class="scale-label">シンプル・クリーン</span>
+    <div class="scale-dots">
+      <div class="scale-dot" onclick="selectDot(this)">1</div>
+      <div class="scale-dot" onclick="selectDot(this)">2</div>
+      <div class="scale-dot" onclick="selectDot(this)">3</div>
+      <div class="scale-dot" onclick="selectDot(this)">4</div>
+      <div class="scale-dot" onclick="selectDot(this)">5</div>
+    </div>
+    <span class="scale-end">緻密・情報量多</span>
+  </div>
+
+  <div class="scale-row">
+    <span class="scale-label">日本的・和的</span>
+    <div class="scale-dots">
+      <div class="scale-dot" onclick="selectDot(this)">1</div>
+      <div class="scale-dot" onclick="selectDot(this)">2</div>
+      <div class="scale-dot" onclick="selectDot(this)">3</div>
+      <div class="scale-dot" onclick="selectDot(this)">4</div>
+      <div class="scale-dot" onclick="selectDot(this)">5</div>
+    </div>
+    <span class="scale-end">グローバル</span>
+  </div>
+
+  <div class="field-block" style="margin-top:20px">
+    <div class="field-label">色のイメージ（好み・傾向）</div>
+    <div class="color-row" id="color-row">
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#1a3fcc"></div>
+        <span class="color-name">ブルー</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#0d9e6e"></div>
+        <span class="color-name">グリーン</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#1a1a1a"></div>
+        <span class="color-name">ブラック</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#e84e1b"></div>
+        <span class="color-name">レッド</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#7c5cfc"></div>
+        <span class="color-name">パープル</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#f0a500"></div>
+        <span class="color-name">イエロー</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#b0b0b0"></div>
+        <span class="color-name">グレー</span>
+      </div>
+      <div class="color-chip" onclick="toggleColor(this)">
+        <div class="color-swatch" style="background:#f5f5f0; border:1px solid #d0d0d0"></div>
+        <span class="color-name">ホワイト</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-grid" style="margin-top:16px">
+    <div class="field-block">
+      <div class="field-label">参考にしたいロゴ・ブランド（好き）</div>
+      <textarea class="write-area" rows="1" placeholder="例：Vercel、Linear、Figma"></textarea>
+    </div>
+    <div class="field-block">
+      <div class="field-label">使いたくない印象・禁止事項</div>
+      <textarea class="write-area" rows="1" placeholder="例：かわいい系、派手な色、古臭い印象"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 04 使用用途 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">使用用途・納品要件</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="field-block">
+    <div class="field-label">主な使用場所（複数可）</div>
+    <div class="check-grid">
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>Webサイト</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>アプリUI内</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>名刺</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>資料・プレゼン</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>SNSアイコン</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>展示・看板</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>Tシャツ等グッズ</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>ファビコン</div>
+      <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-mark">✓</span></div>その他</div>
+    </div>
+  </div>
+
+  <div class="field-block" style="margin-top:16px">
+    <div class="field-label">納品希望形式</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>形式</th>
+          <th>用途</th>
+          <th>必要性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:11px">.ai / .svg</span></td>
+          <td>マスターデータ（ベクター）</td>
+          <td><span class="tag req">必須</span></td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:11px">.png</span> 透過・白黒・カラー</td>
+          <td>Web・資料使用</td>
+          <td><span class="tag req">必須</span></td>
+        </tr>
+        <tr>
+          <td><span style="font-family:'DM Mono',monospace;font-size:11px">.pdf</span></td>
+          <td>印刷入稿用</td>
+          <td><span class="tag">確認</span></td>
+        </tr>
+        <tr>
+          <td>ブランドガイドライン</td>
+          <td>色・フォント・使用ルール定義</td>
+          <td><span class="tag">確認</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="field-grid" style="margin-top:16px">
+    <div class="field-block">
+      <div class="field-label">希望納期</div>
+      <textarea class="write-area" rows="1" placeholder="例：2024年3月末"></textarea>
+    </div>
+    <div class="field-block">
+      <div class="field-label">修正対応回数の想定</div>
+      <textarea class="write-area" rows="1" placeholder="例：初回提案後2回まで"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 05 自由記述 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">補足・自由記述</span>
+    <div class="section-rule"></div>
+  </div>
+  <div class="field-block">
+    <div class="field-label">伝えたいこと・こだわり・懸念点など</div>
+    <textarea class="write-area" rows="4" placeholder="例：会社名の由来、ロゴに込めたいストーリー、既存の素材（写真・イメージ）があれば共有など"></textarea>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <span class="footer-note">Logo Design — Hearing Sheet v1.0</span>
+  <button id="copy-btn" onclick="copyAnswers()" style="
+    background: var(--ink);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background 0.15s;
+  ">回答をコピーして送る</button>
+</div>
+
+<!-- Toast -->
+<div id="toast" style="
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--ink);
+  color: white;
+  padding: 10px 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: all 0.25s;
+  pointer-events: none;
+">コピーしました ✓</div>
+
+<script>
+  function toggle(el) { el.classList.toggle('selected'); }
+  function toggleColor(el) { el.classList.toggle('selected'); }
+  function selectDot(dot) {
+    const row = dot.closest('.scale-dots');
+    row.querySelectorAll('.scale-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  }
+
+  function copyAnswers() {
+    const lines = [];
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+    lines.push('【ロゴ制作 ヒアリングシート 回答】');
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+    // テキストエリアの回答を収集
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(sec => {
+      const title = sec.querySelector('.section-title');
+      if (title) {
+        lines.push(`■ ${title.textContent.trim()}`);
+      }
+
+      // テキストエリア
+      sec.querySelectorAll('.field-block').forEach(block => {
+        const label = block.querySelector('.field-label');
+        const textarea = block.querySelector('.write-area');
+        const checks = block.querySelectorAll('.check-item.selected');
+        const dots = block.querySelectorAll('.scale-row');
+        const colors = block.querySelectorAll('.color-chip.selected');
+
+        if (label && textarea) {
+          const val = textarea.value.trim();
+          lines.push(`${label.textContent.trim()}：${val || '（未記入）'}`);
+        }
+
+        if (label && checks.length > 0) {
+          const selected = Array.from(checks).map(c => c.textContent.replace('✓','').trim()).join('、');
+          lines.push(`${label.textContent.trim()}：${selected}`);
+        }
+
+        if (dots.length > 0) {
+          dots.forEach(row => {
+            const leftLabel = row.querySelector('.scale-label')?.textContent.trim();
+            const rightLabel = row.querySelector('.scale-end')?.textContent.trim();
+            const active = row.querySelector('.scale-dot.active');
+            const val = active ? active.textContent.trim() : '未選択';
+            lines.push(`${leftLabel} ↔ ${rightLabel}：${val}/5`);
+          });
+        }
+
+        if (label && colors.length > 0) {
+          const selected = Array.from(colors).map(c => c.querySelector('.color-name').textContent.trim()).join('、');
+          lines.push(`${label.textContent.trim()}：${selected}`);
+        }
+      });
+      lines.push('');
+    });
+
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+
+    const text = lines.join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      showToast();
+    }).catch(() => {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast();
+    });
+  }
+
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(12px)';
+    }, 2200);
+  }
+</script>
+</body>
+</html>
